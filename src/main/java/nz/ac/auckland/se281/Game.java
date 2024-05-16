@@ -113,6 +113,17 @@ public class Game {
 
     // Determine if AI won the round
     aiWonLastRound = (playerChoice != currentRoundOutcome);
+
+    // Determine if AI won the round
+    aiWonLastRound = (playerChoice != currentRoundOutcome);
+
+    if (aiWonLastRound) {
+      aiWins++;
+      playerLosses++;
+    } else {
+      playerWins++;
+      aiLosses++;
+    }
   }
 
   public void endGame() {
