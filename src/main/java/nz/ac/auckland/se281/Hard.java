@@ -51,6 +51,10 @@ public class Hard implements Ai {
     }
   }
 
+  private void switchStrategy() {
+    currentStrategy = (currentStrategy == Strategy.RANDOM) ? Strategy.TOP : Strategy.RANDOM;
+  }
+
   private int calculateTopChoice(ArrayList<Choice> playerChoices, Choice playerChoice) {
     int oddCount = 0;
     int evenCount = 0;
