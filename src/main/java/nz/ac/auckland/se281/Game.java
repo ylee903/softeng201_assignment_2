@@ -112,7 +112,22 @@ public class Game {
     aiWonLastRound = (playerChoice != currentRoundOutcome);
   }
 
-  public void endGame() {}
+  public void endGame() {
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    showStats();
+    if (playerWins > aiWins) {
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    } else if (aiWins > playerWins) {
+      MessageCli.PRINT_END_GAME.printMessage(aiName);
+    } else {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
+    }
+    gameStarted = false; // End the game
+  }
 
   public void showStats() {
     if (!gameStarted) {
