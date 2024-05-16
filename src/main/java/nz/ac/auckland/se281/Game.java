@@ -25,6 +25,9 @@ public class Game {
   private int aiLosses = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
+    if (gameStarted) {
+      gameStarted = false;
+    }
 
     // record the players name
     playerName = options[0];
