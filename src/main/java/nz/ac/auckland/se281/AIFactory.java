@@ -7,8 +7,8 @@ public class AIFactory {
         return new Easy();
       case "MEDIUM":
         return new Medium();
-        // case "HARD":
-        //  return new Hard();
+      case "HARD":
+        return new Hard();
       default:
         throw new IllegalArgumentException("Unknown difficulty level: " + difficulty);
     }
