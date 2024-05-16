@@ -5,5 +5,9 @@ import nz.ac.auckland.se281.Main.Choice;
 
 public interface Ai {
   // return aiFingerz
-  int getAiFingers(int currentGameRound, ArrayList<Choice> playerChoices, Choice playerChoice);
+  int getAiFingers(
+      int currentGameRound,
+      ArrayList<Choice> playerChoices,
+      Choice playerChoice,
+      boolean aiWonLastRound);
 }

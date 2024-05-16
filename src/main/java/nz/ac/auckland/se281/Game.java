@@ -16,6 +16,7 @@ public class Game {
   private Ai ai = null;
   // create a arraylist of players choices
   private ArrayList<Choice> playerChoices = new ArrayList<>();
+  private boolean aiWonLastRound = false; // Track if AI won the last round
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
@@ -27,6 +28,7 @@ public class Game {
     playerChoice = choice;
     // Set the AI difficulty using the factory method
     setDifficulty(difficulty.name());
+    aiWonLastRound = false; // Reset last outcome for new game
   }
 
   public void setDifficulty(String difficulty) {
@@ -69,7 +71,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
 
     // get ai fingers using ai interface
-    int aiFingers = ai.getAiFingers(currentGameRound, playerChoices, playerChoice);
+    int aiFingers = ai.getAiFingers(currentGameRound, playerChoices, playerChoice, aiWonLastRound);
 
     // print ai fingers
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, String.valueOf(aiFingers));
@@ -84,6 +86,9 @@ public class Game {
         String.valueOf(fingers + aiFingers),
         (fingers + aiFingers) % 2 == 0 ? "EVEN" : "ODD",
         playerChoice == currentRoundOutcome ? playerName : aiName);
+
+    // Determine if AI won the round
+    aiWonLastRound = (playerChoice != currentRoundOutcome);
   }
 
   public void endGame() {}

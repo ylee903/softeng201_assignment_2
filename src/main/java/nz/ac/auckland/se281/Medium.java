@@ -29,7 +29,10 @@ public class Medium implements Ai {
 
   @Override
   public int getAiFingers(
-      int currentGameRound, ArrayList<Choice> playerChoices, Choice playerChoice) {
+      int currentGameRound,
+      ArrayList<Choice> playerChoices,
+      Choice playerChoice,
+      boolean aiWonLastRound) {
     // If the current game round is 3 or less, the AI picks a random number between 0 and 5
     if (currentGameRound <= 3) {
       return Utils.getRandomNumberRange(0, 5);

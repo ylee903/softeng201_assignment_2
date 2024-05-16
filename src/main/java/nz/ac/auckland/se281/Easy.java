@@ -7,7 +7,10 @@ public class Easy implements Ai {
 
   @Override
   public int getAiFingers(
-      int currentGameRound, ArrayList<Choice> playerChoices, Choice playerChoice) {
+      int currentGameRound,
+      ArrayList<Choice> playerChoices,
+      Choice playerChoice,
+      boolean aiWonLastRound) {
 
     // implement the AI, picks random number between 0 and 5 using utils.random
     int aiFingers = Utils.getRandomNumberRange(0, 5);
