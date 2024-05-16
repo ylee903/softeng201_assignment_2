@@ -44,6 +44,10 @@ public class Hard implements Ai {
     if (currentGameRound <= 3) {
       return Utils.getRandomNumberRange(0, 5);
     } else {
+      if (!aiWonLastRound) {
+        switchStrategy();
+      }
+      return applyCurrentStrategy(playerChoices, playerChoice);
       // Count the occurrences of ODD and EVEN numbers chosen by the player
       int oddCount = 0;
       int evenCount = 0;
