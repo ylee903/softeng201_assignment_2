@@ -51,6 +51,12 @@ public class Game {
   }
 
   public void play() {
+    // if game has not started, print error message and return
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
     // display current game round and increment
     currentGameRound++;
     // print current round
