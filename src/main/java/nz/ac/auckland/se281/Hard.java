@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import nz.ac.auckland.se281.Main.Choice;
 
 public class Hard implements Ai {
+  private enum Strategy {
+    RANDOM,
+    TOP
+  }
+
+  private Strategy currentStrategy = Strategy.RANDOM;
+
   // scan through playerChoices and figure out if "ODD" or "EVEN" is more common, return the
   // most common one, if they are same frequency, return "SAME", buefore returning, convert to
   // string
