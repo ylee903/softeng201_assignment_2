@@ -35,6 +35,15 @@ public class Game {
     // Set the AI difficulty using the factory method
     setDifficulty(difficulty.name());
     aiWonLastRound = false; // Reset last outcome for new game
+
+    // Reset game statistics
+    gameStarted = true;
+    playerWins = 0;
+    playerLosses = 0;
+    aiWins = 0;
+    aiLosses = 0;
+    currentGameRound = 0;
+    playerChoices.clear();
   }
 
   public void setDifficulty(String difficulty) {
