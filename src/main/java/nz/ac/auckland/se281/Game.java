@@ -21,28 +21,35 @@ public class Game {
   public void play() {
     // display current game round and increment
     currentGameRound++;
-    MessageCli.START_ROUND.printMessage(String.valueOf(currentGameRound));
     // print current round
-    MessageCli.PRINT_INFO_HAND.printMessage(playerName, "0");
+    MessageCli.START_ROUND.printMessage(String.valueOf(currentGameRound));
 
+    // Declare an integer variable to store the number of fingers the player shows
     int fingers;
+    // Start an infinite loop to keep asking for input until a valid one is provided
     while (true) {
-      // print messagecli for givive fingers
+      // Print a message asking for the player's input
       MessageCli.ASK_INPUT.printMessage();
+      // Read the player's input from the command line
       String playerInput = Utils.scanner.nextLine();
-      // convert playerInput to integer and make sure it is between 0 and 5, if not print invalid
-      // input cli
+      // Try to parse the player's input as an integer
       try {
+        // Convert the player's input to an integer
         fingers = Integer.parseInt(playerInput);
+        // If the number of fingers is between 0 and 5 (inclusive), break the loop
         if (fingers >= 0 && fingers <= 5) {
           break;
         } else {
+          // If the number of fingers is not between 0 and 5, print an invalid input message
           MessageCli.INVALID_INPUT.printMessage();
         }
       } catch (NumberFormatException e) {
+        // If the player's input cannot be parsed as an integer, print an invalid input message
         MessageCli.INVALID_INPUT.printMessage();
       }
     }
+    // print stuff
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
   }
 
   public void endGame() {}
