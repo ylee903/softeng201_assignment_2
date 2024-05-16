@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import nz.ac.auckland.Ai;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -12,6 +13,7 @@ public class Game {
   // name ai player "HAL-9000"
   private final String aiName = "HAL-9000";
   private Choice playerChoice = null;
+  private Ai ai = null;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
@@ -21,6 +23,15 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     // store the player's choice
     playerChoice = choice;
+
+    // create an AI object based on the difficulty (if else)
+    if (difficulty == Difficulty.EASY) {
+      ai = new Easy();
+    } /* else if (difficulty == Difficulty.MEDIUM) {
+        ai = new Medium();
+      } else {
+        ai = new Hard();
+      }*/
   }
 
   public void play() {
@@ -56,8 +67,9 @@ public class Game {
     // print stuff
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
 
-    // implement the AI, picks random number between 0 and 5 using utils.random
-    int aiFingers = Utils.getRandomNumberRange(0, 5);
+    // get ai fingers using ai interface
+    int aiFingers = ai.getAiFingers();
+
     // print ai fingers
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, String.valueOf(aiFingers));
 

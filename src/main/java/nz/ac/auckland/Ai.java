@@ -1,3 +1,6 @@
 package nz.ac.auckland;
 
-public interface Ai {}
+public interface Ai {
+  // return aiFingerz
+  int getAiFingers();
+}
