@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
 import nz.ac.auckland.Ai;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
@@ -14,6 +15,8 @@ public class Game {
   private final String aiName = "HAL-9000";
   private Choice playerChoice = null;
   private Ai ai = null;
+  // create a arraylist of players choices
+  private ArrayList<Choice> playerChoices = new ArrayList<>();
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
@@ -27,11 +30,12 @@ public class Game {
     // create an AI object based on the difficulty (if else)
     if (difficulty == Difficulty.EASY) {
       ai = new Easy();
-    } /* else if (difficulty == Difficulty.MEDIUM) {
-        ai = new Medium();
-      } else {
-        ai = new Hard();
-      }*/
+    } else if (difficulty == Difficulty.MEDIUM) {
+      ai = new Medium();
+    }
+    /* else {
+      ai = new Hard();
+    }*/
   }
 
   public void play() {
@@ -64,11 +68,13 @@ public class Game {
         MessageCli.INVALID_INPUT.printMessage();
       }
     }
+    // if the player/s input is even, store EVEN into the playerChoices arraylist, else store ODD
+    playerChoices.add(fingers % 2 == 0 ? Choice.EVEN : Choice.ODD);
     // print stuff
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
 
     // get ai fingers using ai interface
-    int aiFingers = ai.getAiFingers();
+    int aiFingers = ai.getAiFingers(currentGameRound, playerChoices);
 
     // print ai fingers
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, String.valueOf(aiFingers));
