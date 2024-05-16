@@ -114,5 +114,15 @@ public class Game {
 
   public void endGame() {}
 
-  public void showStats() {}
+  public void showStats() {
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, String.valueOf(playerWins), String.valueOf(playerLosses));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        aiName, String.valueOf(aiWins), String.valueOf(aiLosses));
+  }
 }
