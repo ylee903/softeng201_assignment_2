@@ -55,6 +55,14 @@ public class Hard implements Ai {
     currentStrategy = (currentStrategy == Strategy.RANDOM) ? Strategy.TOP : Strategy.RANDOM;
   }
 
+  private int applyCurrentStrategy(ArrayList<Choice> playerChoices, Choice playerChoice) {
+    if (currentStrategy == Strategy.RANDOM) {
+      return Utils.getRandomNumberRange(0, 5);
+    } else {
+      return calculateTopChoice(playerChoices, playerChoice);
+    }
+  }
+
   private int calculateTopChoice(ArrayList<Choice> playerChoices, Choice playerChoice) {
     int oddCount = 0;
     int evenCount = 0;
