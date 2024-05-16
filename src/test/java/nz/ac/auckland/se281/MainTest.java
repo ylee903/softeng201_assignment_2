@@ -1,7 +1,18 @@
 package nz.ac.auckland.se281;
 
-import static nz.ac.auckland.se281.Main.Command.*;
-import static nz.ac.auckland.se281.MessageCli.*;
+import static nz.ac.auckland.se281.Main.Command.END_GAME;
+import static nz.ac.auckland.se281.Main.Command.NEW_GAME;
+import static nz.ac.auckland.se281.Main.Command.PLAY;
+import static nz.ac.auckland.se281.Main.Command.SHOW_STATS;
+import static nz.ac.auckland.se281.MessageCli.ASK_INPUT;
+import static nz.ac.auckland.se281.MessageCli.GAME_NOT_STARTED;
+import static nz.ac.auckland.se281.MessageCli.INVALID_INPUT;
+import static nz.ac.auckland.se281.MessageCli.PRINT_END_GAME;
+import static nz.ac.auckland.se281.MessageCli.PRINT_END_GAME_TIE;
+import static nz.ac.auckland.se281.MessageCli.PRINT_OUTCOME_ROUND;
+import static nz.ac.auckland.se281.MessageCli.PRINT_PLAYER_WINS;
+import static nz.ac.auckland.se281.MessageCli.START_ROUND;
+import static nz.ac.auckland.se281.MessageCli.WELCOME_PLAYER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -17,7 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
   MainTest.Task1.class,
-  // MainTest.Task2.class,
+  MainTest.Task2.class,
   // MainTest.Task3.class,
   // MainTest.Task4.class,
   // MainTest.Task5.class

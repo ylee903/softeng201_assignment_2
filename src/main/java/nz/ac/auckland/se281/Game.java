@@ -9,6 +9,9 @@ public class Game {
   // store current game round
   private int currentGameRound = 0;
   private String playerName;
+  // name ai player "HAL-9000"
+  private final String aiName = "HAL-9000";
+  private Choice playerChoice = null;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
@@ -16,6 +19,8 @@ public class Game {
     playerName = options[0];
     // print wellcome message using messagecli class
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
+    // store the player's choice
+    playerChoice = choice;
   }
 
   public void play() {
@@ -50,6 +55,22 @@ public class Game {
     }
     // print stuff
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
+
+    // implement the AI, picks random number between 0 and 5 using utils.random
+    int aiFingers = Utils.random.nextInt(6);
+    // print ai fingers
+    MessageCli.PRINT_INFO_HAND.printMessage(aiName, String.valueOf(aiFingers));
+
+    // create string called current round, it is even is sum of fingers is even, and odd if sum of
+    // current finghrs is odd
+    Choice currentRoundOutcome = (fingers + aiFingers) % 2 == 0 ? Choice.EVEN : Choice.ODD;
+
+    // if player chose odd, ai chooses even, and vice versa, if sum is even, whoever chose even
+    // wins, using PRINT_OUTCOME_ROUND.
+    MessageCli.PRINT_OUTCOME_ROUND.printMessage(
+        String.valueOf(fingers + aiFingers),
+        (fingers + aiFingers) % 2 == 0 ? "even" : "odd",
+        playerChoice == currentRoundOutcome ? playerName : aiName);
   }
 
   public void endGame() {}
