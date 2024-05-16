@@ -57,7 +57,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
 
     // implement the AI, picks random number between 0 and 5 using utils.random
-    int aiFingers = Utils.random.nextInt(6);
+    int aiFingers = Utils.getRandomNumberRange(0, 5);
     // print ai fingers
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, String.valueOf(aiFingers));
 
@@ -69,7 +69,7 @@ public class Game {
     // wins, using PRINT_OUTCOME_ROUND.
     MessageCli.PRINT_OUTCOME_ROUND.printMessage(
         String.valueOf(fingers + aiFingers),
-        (fingers + aiFingers) % 2 == 0 ? "even" : "odd",
+        (fingers + aiFingers) % 2 == 0 ? "EVEN" : "ODD",
         playerChoice == currentRoundOutcome ? playerName : aiName);
   }
 
