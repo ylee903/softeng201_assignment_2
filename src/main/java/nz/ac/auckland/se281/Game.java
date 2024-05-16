@@ -1,7 +1,6 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
-import nz.ac.auckland.Ai;
 import nz.ac.auckland.se281.Main.Choice;
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -74,7 +73,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers));
 
     // get ai fingers using ai interface
-    int aiFingers = ai.getAiFingers(currentGameRound, playerChoices);
+    int aiFingers = ai.getAiFingers(currentGameRound, playerChoices, playerChoice);
 
     // print ai fingers
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, String.valueOf(aiFingers));
