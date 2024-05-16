@@ -17,6 +17,12 @@ public class Game {
   // create a arraylist of players choices
   private ArrayList<Choice> playerChoices = new ArrayList<>();
   private boolean aiWonLastRound = false; // Track if AI won the last round
+  // fields to track the player's and AI's wins and looses and if game started
+  private boolean gameStarted = false;
+  private int playerWins = 0;
+  private int playerLosses = 0;
+  private int aiWins = 0;
+  private int aiLosses = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 

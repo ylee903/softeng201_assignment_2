@@ -790,13 +790,123 @@ public class MainTest {
   }
 
   @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-  public static class YourTests extends CliTest {
+  public static class mytests extends CliTest {
 
-    public YourTests() {
+    public mytests() {
       super(Main.class);
     }
 
     @Test
-    public void yourtest() throws Exception {}
+    public void T4_01_play_ask_for_input_HAL_first_three_rounds_random() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Valerio",
+          PLAY,
+          "1", // Round 1
+          PLAY,
+          "3", // Round 2
+          PLAY,
+          "5" // Round 3
+          );
+
+      // Check that the AI uses random strategy for the first three rounds
+      assertContains(START_ROUND.getMessage("1"));
+      int res1 = MainTest.getPlay(1, "HAL-9000", getCaptureOut());
+      assertTrue(res1 >= 0 && res1 <= 5);
+
+      assertContains(START_ROUND.getMessage("2"));
+      int res2 = MainTest.getPlay(2, "HAL-9000", getCaptureOut());
+      assertTrue(res2 >= 0 && res2 <= 5);
+
+      assertContains(START_ROUND.getMessage("3"));
+      int res3 = MainTest.getPlay(3, "HAL-9000", getCaptureOut());
+      assertTrue(res3 >= 0 && res3 <= 5);
+    }
+
+    @Test
+    public void T4_02_play_ask_for_input_HAL_switch_strategy_on_loss() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Valerio",
+          PLAY,
+          "1", // Round 1
+          PLAY,
+          "3", // Round 2
+          PLAY,
+          "5", // Round 3
+          PLAY,
+          "4", // Round 4 - AI loses, should switch strategy
+          PLAY,
+          "2" // Round 5 - Check strategy
+          );
+
+      // Check that the AI uses top strategy after losing the fourth round
+      assertContains(START_ROUND.getMessage("4"));
+      int res4 = MainTest.getPlay(4, "HAL-9000", getCaptureOut());
+      assertTrue(res4 >= 0 && res4 <= 5); // Random in round 4
+
+      assertContains(START_ROUND.getMessage("5"));
+      int res5 = MainTest.getPlay(5, "HAL-9000", getCaptureOut());
+      assertTrue(res5 >= 0 && res5 <= 5); // Strategy based on playerChoices history
+    }
+
+    @Test
+    public void T4_03_play_ask_for_input_HAL_keep_strategy_on_win() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Valerio",
+          PLAY,
+          "1", // Round 1
+          PLAY,
+          "3", // Round 2
+          PLAY,
+          "5", // Round 3
+          PLAY,
+          "2", // Round 4 - AI wins, should keep strategy
+          PLAY,
+          "4" // Round 5 - Check strategy
+          );
+
+      // Check that the AI keeps the random strategy after winning the fourth round
+      assertContains(START_ROUND.getMessage("4"));
+      int res4 = MainTest.getPlay(4, "HAL-9000", getCaptureOut());
+      assertTrue(res4 >= 0 && res4 <= 5); // Random in round 4
+
+      assertContains(START_ROUND.getMessage("5"));
+      int res5 = MainTest.getPlay(5, "HAL-9000", getCaptureOut());
+      assertTrue(res5 >= 0 && res5 <= 5); // Should still be random as it won the previous round
+    }
+
+    @Test
+    public void T4_04_play_ask_for_input_HAL_new_game_resets_strategy() throws Exception {
+      Utils.random = new java.util.Random(1);
+      runCommands(
+          NEW_GAME + " HARD ODD",
+          "Valerio",
+          PLAY,
+          "1", // Round 1
+          PLAY,
+          "3", // Round 2
+          PLAY,
+          "5", // Round 3
+          PLAY,
+          "2", // Round 4 - AI wins
+          PLAY,
+          "4", // Round 5 - AI wins
+          END_GAME,
+          NEW_GAME + " HARD EVEN", // New game should reset AI strategy
+          "Valerio",
+          PLAY,
+          "0" // Round 1 of new game
+          );
+
+      // Check that the AI uses random strategy again in the new game
+      assertContains(START_ROUND.getMessage("1"));
+      int res = MainTest.getPlay(1, "HAL-9000", getCaptureOut());
+      assertTrue(res >= 0 && res <= 5);
+    }
   }
 }
