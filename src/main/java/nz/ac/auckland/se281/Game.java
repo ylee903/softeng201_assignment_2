@@ -25,16 +25,12 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     // store the player's choice
     playerChoice = choice;
+    // Set the AI difficulty using the factory method
+    setDifficulty(difficulty.name());
+  }
 
-    // create an AI object based on the difficulty (if else)
-    if (difficulty == Difficulty.EASY) {
-      ai = new Easy();
-    } else if (difficulty == Difficulty.MEDIUM) {
-      ai = new Medium();
-    }
-    /* else {
-      ai = new Hard();
-    }*/
+  public void setDifficulty(String difficulty) {
+    this.ai = AIFactory.createAI(difficulty);
   }
 
   public void play() {
